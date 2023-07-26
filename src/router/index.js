@@ -22,7 +22,7 @@ import DetalleEntrega from '@/views/entrega/DetalleEntrega.vue'
 import ActualizarEntregaView from '@/views/entrega/actualizarEntrega.vue'
 //grupo usuario
 import CrearGrupo from '@/views/grupo/CrearGrupo.vue'
-import ListaGrupos from '@/views/grupo/ListaGrupos.vue'
+import ListaGrupos from '@/components/aprendiz/ListaGrupos.vue'
 import GrupoAgregarIntegrantes from '@/views/grupo/AgregarIntegrantes.vue'
 //ficha usuario
 import CrearFicha from '@/components/instructor/CrearFicha.vue'
@@ -63,7 +63,7 @@ const routes = [
     component:terminosycondicionesVue
   },  
   {
-    path: '/inicio',
+    path: '/',
     name: 'inicio',
     component: InicioView
   },
@@ -78,11 +78,13 @@ const routes = [
     name: 'ver-proyecto',
     component: VerProyectoView
   },
+  
   {
     path:'/ver-entrega/:id',
     name: 'ver-entrega',
     component: verEntregaView
   },
+  
   //proyectos
   {
     path: '/mis-proyectos',

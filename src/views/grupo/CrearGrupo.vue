@@ -1,21 +1,21 @@
-<template v-if="$store.state.user.isAuthenticated">
-    <div>
-      <h1>Agregar Grupo</h1>
-      <div class="container">
-        <form @submit.prevent="crearGrupo"><br><br>
-          <div>
-            <label  for="nombre_grupo">Nombre:</label>
-            <input type="text" class="form-control" id="nombre_grupo" v-model="nombre_grupo">
-          </div><br>
-          <div>
-            <button type="submit" class="btn btn-outline-primary">Agregar Grupo</button><br><br>
-            <button class="btn btn-outline-success" v-on:click="verGrupos">Ver Grupos</button><br><br>
-            <button  class="btn btn-outline-danger" v-on:click="cancelar" > Cancelar </button>
-          </div>
-        </form>
-      </div>
+<template>
+  <div v-if="$store.state.user.isAuthenticated">
+    <h1>Agregar Grupo</h1>
+    <div class="container">
+      <form @submit.prevent="crearGrupo">
+        <div>
+          <label for="nombre_grupo">Nombre:</label>
+          <input type="text" class="form-control" id="nombre_grupo" v-model="grupo.nombre_grupo">
+          <b-alert v-if="showAlert" show variant="danger">{{ alertMessage }}</b-alert>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Agregar Grupo</button>
+        <b-spinner v-if="showSpinner" variant="success" label="Creando Grupo"></b-spinner>
+        <button class="btn btn-outline-success" @click="verGrupos">Ver Grupos</button>
+        <button class="btn btn-outline-danger" @click="cancelar">Cancelar</button>
+      </form>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
@@ -23,27 +23,39 @@
   export default {
     data() {
       return {
-        nombre_grupo: '',
-      //   descripcion: ''
+        grupo: {
+          nombre_grupo: '',
+        },
+        showAlert: false,
+        alertMessage: "",
+        showSpinner: false
       };
     },
   
     methods: {
       crearGrupo() {
-        axios.post('http://localhost:8000/api/grupo/', {
-          nombre_grupo: this.nombre_grupo,
-          // descripcion: this.descripcion
-        })
-        .then(response => {
-          console.log(response.data);
-          this.$router.push('/ListaGrupos');
-        })
-        .catch(error => {
-          console.log(error.response.data);
-        })   
+        if (!this.grupo.nombre_grupo) {
+          this.showAlert = true;
+          this.alertMessage = "Ingrese un nombre válido";
+          return;
+        }
+
+        this.showSpinner = true;
+
+        axios.post('http://localhost:8000/api/grupo/', this.grupo)
+          .then(response => {
+            console.log(response.data);
+            this.$router.push('/lista-grupos');
+          })
+          .catch(error => {
+            console.log(error.response.data);
+          })
+          .finally(() => {
+            this.showSpinner = false;
+          });
       },
       verGrupos(){
-          this.$router.push('/ListaGrupos')
+          this.$router.push('/lista-grupos')
       },
       cancelar(){
           this.$router.push('/inicio')
@@ -54,4 +66,5 @@
   //   }
   };
   </script>
+  
   
