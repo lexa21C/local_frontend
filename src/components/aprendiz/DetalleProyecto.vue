@@ -30,6 +30,7 @@
                         </b-button>
                     </div>
                 </div>
+                {{ proyecto.foto }}
             </b-card>
       </div>
     </div>

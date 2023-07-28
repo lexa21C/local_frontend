@@ -53,7 +53,7 @@
             >
               <b-form-file
                 id="foto"
-                v-model="proyecto.foto"
+                v-model="foto"
                 accept="image/*"
               ></b-form-file>
             </b-form-group>
@@ -85,7 +85,7 @@
             <b-button class="m-1" type="reset" variant="danger">Cancelar</b-button>
             <b-button class="m-1 enviar" @click="editarProyecto(proyecto.id)" >Enviar</b-button>
           </b-form>
-          <div class="mt-3">Selected: <strong>{{this.grupoSelecionado}}</strong></div>
+          <div class="mt-3">Selected: <strong>{{this.proyecto}}</strong></div>
         </b-card>
       </div>
     </div>
@@ -101,7 +101,7 @@
         return {
           perfil: this.$store.state.perfil.id,
           grupoSelecionado:null,
-          
+          foto:null,
           grupo:null,
           proyecto: {
             id:null,
@@ -140,16 +140,28 @@
         async detalleProyecto(id){
           this.$router.push('/detalle-proyecto/'+id)
         },
-
         async editarProyecto(id){
           this.proyecto.autor=this.perfil
+          this.proyecto.foto=this.foto
           this.proyecto.aprendiz=this.grupo[0].id
-          console.log(this.proyecto)
-          await this.axios.put('api/proyecto/'+id+'/', this.proyecto)
+          try {
+
+            await this.axios.put('api/proyecto/'+id+'/', this.proyecto, {
+            headers: {
+              'Content-Type': 'multipart/form-data', // Aseguramos que el encabezado esté configurado correctamente
+            },
+          });
           await this.detalleProyecto(id)
   
-  
-        },
+
+          } catch (error) {
+       
+            console.error('Error:', error.response.data);
+          }
+       
+        
+      },
+
         async getGrupo(id){
           
             await this.axios('api/grupo-proyecto/'+id+'/').then(response=>{
@@ -158,11 +170,28 @@
             })
             console.log(this.grupo)
         },
+        async guardaFoto() {
+      let url = 'http://lexa2803.pythonanywhere.com/media/proyectos/foto/IMG-20230601-WA0037_PislcfP.jpg';
+      if (url) {
+        try {
+          console.log('Descargando imagen desde:', url);
+          const response = await axios.get(url, {
+            responseType: 'blob',
+          });
+          this.foto = new File([response.data], 'foto.jpg', { type: 'image/jpeg' });
+          console.log('Imagen descargada exitosamente:', this.foto);
+        } catch (error) {
+          console.error('Error al descargar la imagen:', error);
+        }
+      }
+    },
+
       },
       async mounted(){
           await this.getCategoria()
           await this.verProyecto()
           await this.getGrupo(this.perfil)
+          await this.guardaFoto();
           
       }
     }

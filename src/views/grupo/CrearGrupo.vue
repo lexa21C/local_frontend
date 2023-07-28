@@ -42,7 +42,7 @@
 
         this.showSpinner = true;
 
-        axios.post('http://localhost:8000/api/grupo/', this.grupo)
+        axios.post('api/grupo/', this.grupo)
           .then(response => {
             console.log(response.data);
             this.$router.push('/lista-grupos');

@@ -74,7 +74,7 @@
     methods: {
       obtenerNombreGrupo() {
       const grupoId = this.$route.params.id;
-      axios.get(`http://127.0.0.1:8000/api/grupo/${grupoId}/`)
+      axios.get(`api/grupo/${grupoId}/`)
         .then(response => {
           this.nombreGrupo = response.data.nombre_grupo; // Asignar el nombre del grupo a la propiedad
           //console.log(this.nombreGrupo)
@@ -84,7 +84,7 @@
         });
     },
       async obtenerInscritos(id) {
-        const respuesta = await axios.get(`http://127.0.0.1:8000/api/agregar-integrantes/${id}/`);
+        const respuesta = await axios.get(`api/agregar-integrantes/${id}/`);
         this.inscritos = respuesta.data;
       },
       async agregarMiembro(inscrito) {
@@ -96,7 +96,7 @@
           estado: inscrito.estado
         };
         datosInscrito.nombre_grupo = grupoId;
-        await axios.put(`http://127.0.0.1:8000/api/inscrito/${inscrito.id}/`, datosInscrito);
+        await axios.put(`api/inscrito/${inscrito.id}/`, datosInscrito);
         this.inscritos = this.inscritos.filter(item => item.id !== inscrito.id); // Eliminar el inscrito de la lista de inscritos
         this.getIntegrantes(); // Actualizar la lista de integrantes en el componente Grupo
       },
@@ -105,7 +105,7 @@
       },
       getIntegrantes() {
         const grupoId = this.$route.params.id;
-        axios.get(`http://127.0.0.1:8000/api/integrantes/${grupoId}/`)
+        axios.get(`api/integrantes/${grupoId}/`)
           .then(response => {
             this.integrantes = response.data;
             //this.nombreGrupo = this.integrantes[0].nombre_grupo.nombre_grupo;
