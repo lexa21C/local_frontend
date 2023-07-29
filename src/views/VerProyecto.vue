@@ -14,6 +14,11 @@
 
         </div>
       </b-card>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" @click="verProyecto()">Atrás</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +51,7 @@ export default{
   },
   methods:{
       
-      async verProyecto (){
+      async getProyecto (){
       let id = this.$route.params.id
       await axios.get("api/proyecto/"+id+"/").then(response=>{
           this.proyecto.id=response.data.id
@@ -57,11 +62,14 @@ export default{
           this.proyecto.categorias = response.data.categorias
           });
           
-      }
+      },
+      verProyecto(){
+        this.$router.push('/lista-proyecto')
+      },
          
   },
   async mounted(){
-      await this.verProyecto()
+      await this.getProyecto()
   }
 }
 </script>

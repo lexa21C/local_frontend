@@ -53,7 +53,7 @@
       return {
         proyecto_estado:null,
         selectedOption: null,
-        options: ['en revision','en desarrollo', 'terminado'],
+        options: ['en revision','en desarrollo','anulado' ,'terminado'],
         proyecto:null,
       }
     },

@@ -68,21 +68,21 @@
                 type="url"
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              label="categorias:"
-            >
-            <b-dropdown text="Seleccionar categorria">
-              <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in categoria" :key="item.id" >
-                <b-form-checkbox  :value="item.id">
-                  {{ item.nombre }}
-                </b-form-checkbox>
+            <b-form-group label="categorias:">
+            <b-dropdown text="Seleccionar categoría">
+              <b-form-checkbox-group
+                v-model="proyecto.categorias"
+                v-for="item in categorias"
+                :key="item.id"
+              >
+                <b-form-checkbox :value="item.id">{{ item.nombre }}</b-form-checkbox>
               </b-form-checkbox-group>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item >Seleccionar</b-dropdown-item>
+              <b-dropdown-item>Seleccionar</b-dropdown-item>
             </b-dropdown>
-            </b-form-group>
+          </b-form-group>
           
-            <b-button class="m-1" type="reset" variant="danger">Cancelar</b-button>
+            <b-button class="m-1" type="reset" variant="danger" @click="detalleProyecto(proyecto.id)">Cancelar</b-button>
             <b-button class="m-1 enviar" @click="editarProyecto(proyecto.id)" >Enviar</b-button>
           </b-form>
           <div class="mt-3">Selected: <strong>{{this.proyecto}}</strong></div>
@@ -110,10 +110,10 @@
             aprendiz:null,
             foto: null,
             codigo_fuente: null,
-            categorias: null,
+            categorias: [],
           },
 
-          categoria: [],
+          categorias: [],
           show: true,
   
         }
@@ -133,7 +133,7 @@
         } ,
         async getCategoria(){
               await this.axios('api/categoria/').then(response=>{
-                  this.categoria = response.data
+                  this.categorias = response.data
                   
               })
         },
@@ -144,11 +144,15 @@
           this.proyecto.autor=this.perfil
           this.proyecto.foto=this.foto
           this.proyecto.aprendiz=this.grupo[0].id
-          console.log(this.proyecto)
+          console.log(this.proyecto.categorias)
           try {
 
-            await this.axios.put('api/proyecto/'+id+'/', this.proyecto);
-          await this.detalleProyecto(id)
+            await this.axios.put('api/proyecto/'+id+'/', this.proyecto, {
+            headers: {
+              'Content-Type': 'multipart/form-data', // Aseguramos que el encabezado esté configurado correctamente
+            },
+          });
+          
   
 
           } catch (error) {
@@ -168,7 +172,6 @@
             console.log(this.grupo)
         },
         async guardaFoto(url) {
-   
       if (url) {
         try {
           console.log('Descargando imagen desde:', url);
@@ -188,7 +191,7 @@
           await this.getCategoria()
           await this.verProyecto()
           await this.getGrupo(this.perfil)
-          await this.guardaFoto(this.proyecto.foto);
+          await this.guardaFoto();
           
       }
     }

@@ -15,10 +15,10 @@
                       <p>Descripcion:</p>
                       {{ item.descripcion }}
                   </b-card-text>
-                  <b-button  @click="verProyecto(item.id)" class="m-2 position-absolute bottom-0 end-0">
-                      {{ item.calificacion }}
-                  </b-button>
-              </b-card-body>
+                </b-card-body>
+                <div class="text-end ">
+                  <span class="link-text" @click="verProyecto(item.id)" disabled>ver mas</span>
+                </div>
           </b-card>
           
         </div>
@@ -40,11 +40,7 @@ import axios from 'axios'
   },
     data() {
       return {
-        fields: [
-          { key: 'perfil.usuario.first_name', label: 'Nombre' },
-          { key: 'perfil.usuario.last_name', label: 'Apellido' },
-          { key: 'perfil.rol.nombre', label: 'Rol' }
-        ],
+       
         items: null,
         ficha:null,
         modalShow: false,
@@ -52,7 +48,7 @@ import axios from 'axios'
       };
     },
     methods:{
-      async getFichaIntegrantes(){
+      async getFichaProyectos(){
         let id = this.$route.params.id
         axios.get('/api/proyectos-instructor/'+id+'/').then(response => {
           this.items = response.data
@@ -74,7 +70,7 @@ import axios from 'axios'
       
     },
     async mounted(){
-      await this.getFichaIntegrantes()
+      await this.getFichaProyectos()
       await this.getFicha()
     }
    

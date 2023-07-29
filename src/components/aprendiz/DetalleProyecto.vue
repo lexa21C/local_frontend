@@ -25,7 +25,7 @@
                         <b-button class="m-1  mr-2" @click="editarProyecto(proyecto.id)" variant="warning">
                             <b-icon  icon="pencil"></b-icon> 
                         </b-button>
-                        <b-button class="m-1 " @click="eliminarProyecto(entrega)" variant="danger">
+                        <b-button class="m-1 " @click="eliminarProyecto(proyecto.id)" variant="danger">
                             <b-icon icon="trash"></b-icon>
                         </b-button>
                     </div>
@@ -45,8 +45,9 @@ export default{
     data(){
         return{
             categoria:[],
-            proyecto: null
-            ,
+            proyecto: null,
+            entrega:null
+            
         }
     },
     
@@ -57,6 +58,21 @@ export default{
               console.log(`ID: ${categoria[i]}`);
             }
         },
+        async eliminarProyecto(id) {
+      if (this.proyecto.estado === 'en revision' ) {
+        // Display the confirmation alert before deletion
+        const confirmed = window.confirm('¿Estás seguro de eliminar este proyecto?');
+
+        if (confirmed) {
+          // Proceed with deletion
+          await axios.delete('api/proyecto/' + id + '/');
+          await this.getEntregas();
+        }
+      } else {
+        // Show an alert indicating that the project cannot be deleted
+        window.alert('El proyecto ha sido aprobado y no se puede eliminar.');
+      }
+    },
 
         getCategoria(categorias_id){
             axios.get('api/categoria/'+categorias_id+'/').then(response=>{
@@ -72,9 +88,19 @@ export default{
             });
             this.idCategoria(this.proyecto.categorias)
         },
+        getEntregas(){
+            let id = this.$route.params.id
+              axios.get("api/proyecto-entregas/"+id+'/').then(response=>{
+              this.entrega= response.data
+            })
+        },
         editarProyecto(id){
             console.log(id)
             this.$router.push('/editar-proyecto/'+id)
+        },
+        misProyectos(id){
+            console.log(id)
+            this.$router.push('/mis-proyecto/'+id)
         },
            
     },

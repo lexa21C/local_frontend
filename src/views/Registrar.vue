@@ -6,60 +6,66 @@
         sm="12"
         >
         <h2>Registrar Usuarios</h2>
-        <b-form-group
-        label="Formulario de registro"
-        >
-        <b-button @click="descargarDocumento()" variant="success">Download </b-button>
-    
-        
-      </b-form-group>
-        <b-form class="">
+        <b-card md="5">
+
           <b-form-group
-            id="documento"
-            label="Documento :"
-            label-for="documento"
+          label="Haz clic en el botón de abajo para descargar el formulario."
           >
-            <b-form-file
+          <b-button @click="descargarDocumento()" variant="success">Descargar  </b-button>
+      
+          
+        </b-form-group>
+          <b-form class="m-1">
+            <b-form-group
               id="documento"
-              v-model="documento"   
-              accept=".xls,.xlsx"
-              name="file"
-            ></b-form-file>
-          </b-form-group>
-          <b-form-group
-            label="Rol:"
-          >
-            <b-form-select 
-              v-model="rol_id"  
-              name="rol_id"
+              label="Documento :"
+              label-for="documento"
             >
-              <b-form-select-option
-                v-for="rol in rol"
-                :key="rol.id"
-                :value="rol.id"
-              >
-                {{ rol.nombre }}
-              </b-form-select-option>
-            </b-form-select>   
-          </b-form-group>
-          <b-form-group
-            label="Ficha"
-          >    
-            <b-form-select 
-              v-model="ficha_id" 
-              name="ficha_id" 
+              <b-form-file
+                id="documento"
+                v-model="documento"   
+                accept=".xls,.xlsx"
+                name="file"
+              ></b-form-file>
+            </b-form-group>
+            <b-form-group
+              label="Rol:"
             >
-              <b-form-select-option
-                v-for="ficha in ficha"
-                :key="ficha.id"
-                :value="ficha.id"
+              <b-form-select 
+                v-model="rol_id"  
+                name="rol_id"
               >
-                {{ ficha.codigo }}
-              </b-form-select-option>
-            </b-form-select>
-          </b-form-group>
-        </b-form>
-        <b-button @click="uploadFile">Subir archivo</b-button>
+                <b-form-select-option
+                  v-for="rol in rol"
+                  :key="rol.id"
+                  :value="rol.id"
+                >
+                  {{ rol.nombre }}
+                </b-form-select-option>
+              </b-form-select>   
+            </b-form-group>
+            <b-form-group
+              label="Ficha"
+            >    
+              <b-form-select 
+                v-model="ficha_id" 
+                name="ficha_id" 
+              >
+                <b-form-select-option
+                  v-for="ficha in ficha"
+                  :key="ficha.id"
+                  :value="ficha.id"
+                >
+                  {{ ficha.codigo }}
+                </b-form-select-option>
+              </b-form-select>
+            </b-form-group>
+          </b-form>
+          <div class="m-1">
+  
+            <b-button @click="uploadFile">Registrar</b-button>
+          </div>
+        </b-card>
       </b-col>
       <b-col
         md="6"

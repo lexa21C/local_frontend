@@ -18,7 +18,7 @@
     
         <b-card class="m-1 p-1"  style="width: 75%;">
           <!-- Contenido de la tarjeta -->
-          <b-form>
+          <b-form encode="multipart/form-data">
             <b-form-group 
               id="input-group-1"
               label="Nombre del proyecto:"
@@ -46,7 +46,7 @@
             </b-form-group>
             
             
-            <b-form-group
+            <!-- <b-form-group
               id="foto"
               label="Logo de la App:"
               label-for="foto"
@@ -56,7 +56,7 @@
                 v-model="proyecto.foto"
                 accept="image/*"
               ></b-form-file>
-            </b-form-group>
+            </b-form-group>  -->
            
             <b-form-group
               id="codigo_fuente"
@@ -73,8 +73,8 @@
               label="categorias:"
             >
             <b-dropdown text="Seleccionar categoria">
-              <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in categorias" :key="item.id" >
-                <b-form-checkbox  :value="item.url">
+              <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in l_categorias" :key="item.id" >
+                <b-form-checkbox  :value="item.id">
                   {{ item.nombre }}
                 </b-form-checkbox>
               </b-form-checkbox-group>
@@ -82,6 +82,7 @@
               <b-dropdown-item >Seleccionar</b-dropdown-item>
             </b-dropdown>
             </b-form-group>
+            
           </b-form>
           <div class="row m-1">
             <div>
@@ -90,7 +91,10 @@
             </div>
      
           </div>
+          <b-form-file v-model="proyecto.foto" class="mt-3" plain></b-form-file>
+          <div class="mt-3">Selected file: {{ selectedFile ? selectedFile.name : 'No file selected' }}</div>
         </b-card>
+        {{ proyecto }}
       </div>
     </div>
   </div>
@@ -103,6 +107,8 @@
     data() {
       return {
         perfil: this.$store.state.perfil.id,
+        selectedFile: null, // Variable para guardar el objeto File seleccionado
+    
         proyecto: { 
           nombre_proyecto:null,
           descripcion:null,
@@ -112,7 +118,7 @@
           categorias: [],
           autor: null,
         },
-        categorias: [],
+        l_categorias: [],
         grupo:null,
 
    
@@ -122,7 +128,7 @@
     methods: {
       async getCategoria(){
             await this.axios('api/categoria/').then(response=>{
-                this.categorias = response.data
+                this.l_categorias = response.data
                 
             })
         },
@@ -133,27 +139,34 @@
             })
             console.log(this.grupo)
         },
-      async postProyecto(){
-        this.proyecto.autor=this.perfil
-        this.proyecto.aprendiz=this.grupo[0].id
-        try {
-      // Envía los datos a tu servicio en Django utilizando Axios
-      // Aquí debes reemplazar 'URL_DEL_SERVICIO' con la URL de tu servicio en Django
-          const response =  await this.axios.post('api/proyecto/', this.proyecto, {
-          headers: {
-            'Content-Type': 'multipart/form-data', // Aseguramos que el encabezado esté configurado correctamente
-          },
-        });
-          // Aquí puedes manejar la respuesta del servicio, mostrar un mensaje de éxito, etc.
-          let id_proyecto= response.data.id
-          this.verProyecto(id_proyecto)
-        } catch (error) {
-      // Manejo de errores en caso de que falle la solicitud
-          console.error('Error:', error.response.data);
-        }
+        async postProyecto() {
+      // Set the 'autor' and 'aprendiz' properties before sending the data
+      this.proyecto.autor = this.perfil;
+      this.proyecto.aprendiz = this.grupo[0].id;
+
+      const formData = new FormData();
+      formData.append('nombre_proyecto', this.proyecto.nombre_proyecto);
+      formData.append('descripcion', this.proyecto.descripcion);
+      formData.append('foto', this.proyecto.foto);
+      formData.append('aprendiz', this.grupo[0].id);
+      formData.append('codigo_fuente', this.proyecto.codigo_fuente);
+      formData.append('categorias', this.proyecto.categorias);
+
+      try {
+        // Send the project data to your API endpoint using Axios
+        const archivo = { headers: { 'Content-Type': 'multipart/form-data'} } ;// Set the correct content type for file upload
+        const response = await this.axios.post('api/proyecto/', formData, archivo);
+
+        // Handle the response here (e.g., show success message or redirect to project details)
+        let id_proyecto = response.data.id;
+        this.verProyecto(id_proyecto);
+      } catch (error) {
+        // Handle errors here (e.g., show error message)
+        console.error('Error:', error.response.data);
+      }
+    },
        
-        
-      },
+      // Enví
       async verProyecto(id){
         this.$router.push('/detalle-proyecto/'+id)
       },
@@ -161,6 +174,12 @@
         this.$router.push('/lista-proyecto')
       }
     },
+    watch: {
+    // Observar cambios en la propiedad "proyecto.foto"
+    'proyecto.foto': function(newFile) {
+      this.selectedFile = newFile; // Actualizar la variable "selectedFile" cuando se seleccione un archivo
+    },
+  },
     async mounted(){
         await this.getCategoria()
         await this.getGrupo(this.perfil)

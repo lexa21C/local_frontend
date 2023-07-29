@@ -134,45 +134,45 @@ import axios from 'axios'
         
       },
       async guardaDocumento(url) {
-  if (url) {
-    try {
-      console.log('Descargando documento desde:', url);
-      const response = await axios.get(url, {
-        responseType: 'blob',
-      });
-
-      // Determine the file type based on the content type
-      let fileType = 'application/octet-stream';
-      if (response.headers['content-type']) {
-        fileType = response.headers['content-type'];
-      }
-
-      // Generate a filename with the correct extension based on the file type
-      let filename = 'documento';
-      if (fileType === 'application/pdf') {
-        filename += '.pdf';
-      } else if (
-        fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      ) {
-        filename += '.docx';
-      } else if (fileType === 'application/vnd.ms-excel') {
-        filename += '.xls';
-      } else {
-        // If the file type is not recognized, you can handle it according to your needs.
-        console.warn('Unsupported file type:', fileType);
-        return;
-      }
-
-      // Create a new File with the response data and the generated filename
-      this.documento = new File([response.data], filename, { type: fileType });
-      // Now you can use the "documento" variable as needed (e.g., save it to a data property).
-
-      console.log('Documento descargado exitosamente:', this.documento);
-    } catch (error) {
-      console.error('Error al descargar el documento:', error);
-    }
-  }
-},
+          if (url) {
+            try {
+              console.log('Descargando documento desde:', url);
+              const response = await axios.get(url, {
+                responseType: 'blob',
+              });
+            
+              // Determine the file type based on the content type
+              let fileType = 'application/octet-stream';
+              if (response.headers['content-type']) {
+                fileType = response.headers['content-type'];
+              }
+            
+              // Generate a filename with the correct extension based on the file type
+              let filename = 'documento';
+              if (fileType === 'application/pdf') {
+                filename += '.pdf';
+              } else if (
+                fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+              ) {
+                filename += '.docx';
+              } else if (fileType === 'application/vnd.ms-excel') {
+                filename += '.xls';
+              } else {
+                // If the file type is not recognized, you can handle it according to your needs.
+                console.warn('Unsupported file type:', fileType);
+                return;
+              }
+            
+              // Create a new File with the response data and the generated filename
+              this.documento = new File([response.data], filename, { type: fileType });
+              // Now you can use the "documento" variable as needed (e.g., save it to a data property).
+            
+              console.log('Documento descargado exitosamente:', this.documento);
+            } catch (error) {
+              console.error('Error al descargar el documento:', error);
+            }
+          }
+        },
 
 
       async verProyecto(id){

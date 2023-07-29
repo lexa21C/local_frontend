@@ -49,11 +49,20 @@ export default{
         }
     },
     methods:{
-        getProyecto(){
-            axios.get("api/proyecto/").then(response=>{
-            this.proyectos= response.data
-          })
+      getProyecto() {
+      axios.get("api/proyecto/", {
+        params: {
+          _sort: "id", // Ordenar por ID
+          _order: "desc", // De mayor a menor (los IDs más altos primero)
         },
+      })
+      .then(response => {
+        this.proyectos = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
         descripcion(descripcion){
           // descripcion corta
           if (descripcion.length > 100) {

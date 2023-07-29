@@ -14,6 +14,11 @@
         <b-card class=" m-2">
           <Participantes></Participantes>
         </b-card>
+        <!-- <div class="row justify-content-center">
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" @click="verProyecto(proyecto.id)">Atrás</button>
+        </div>
+      </div> -->
       </div>
      </body>
 
@@ -43,6 +48,11 @@
     CalificarProyecto,
     ListaEntrega,
     Participantes
+  },
+  methods:{
+    async verProyecto(id){
+        this.$router.push('/ficha-proyecto/'+id)
+      },
   }
 
   }

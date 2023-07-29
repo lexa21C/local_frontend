@@ -15,14 +15,18 @@
             </div>
             <div class="row">
                 <div>
-                    <p>Archivo</p>
+                    <p>Haz clic en el botón de abajo para descargar el archivo.</p>
                     <b-button @click="descargarDocumento" variant="primary">Descargar Archivo</b-button>
                 </div>
 
                 <!-- descargar el documento aqui de la entrega -->
-            </div>
-            
+            </div>           
         </b-card>
+        <div class="row justify-content-center">
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" @click="verProyecto(proyecto.id)">Atrás</button>
+        </div>
+      </div>
     </div>
 </template>
 <script>
@@ -85,6 +89,9 @@ export default{
             enlaceTemporal.click();
             document.body.removeChild(enlaceTemporal);
        },
+       async verProyecto(id){
+        this.$router.push('/ver-proyecto/'+id)
+      },
     },
     async mounted(){
         await this.getEntrega()

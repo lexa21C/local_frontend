@@ -53,6 +53,7 @@
   export default {
     data() {
       return {
+        perfil: this.$store.state.perfil.id,
         fields: [
           { key: 'codigo', label: 'ficha' },
           { key: 'action', label: 'action' } // Agregamos una nueva columna para el botón "Ver"
@@ -62,22 +63,22 @@
     },
     methods: {
       async getFichaIntegrantes(id) {
-        await this.axios.get("/api/fichas-usuario/" + id + '/').then(response => {
+        await this.axios.get("api/fichas-usuario/" + id + '/').then(response => {
           this.items = response.data
         })
       },
       fichaIntegrantes(id){
           console.log(id)
-            this.$router.push('/ficha-integrantes/'+id)
+            this.$router.push('ficha-integrantes/'+id)
         },
       fichaProyectos(id){
           console.log(id)
-            this.$router.push('/ficha-proyectos/'+id)
+            this.$router.push('ficha-proyectos/'+id)
         },
       
     },
     mounted() {
-        this.getFichaIntegrantes(3)
+        this.getFichaIntegrantes(this.perfil)
     },
   };
   </script>

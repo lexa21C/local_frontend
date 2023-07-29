@@ -13,7 +13,19 @@
             <div class="row">
                 <p><span class="fw-lighter">Nota del Instructor: </span>{{ entrega.respuesta_instructor }}</p>
             </div>
+            <div class="row">
+                <div>
+                    <p>Haz clic en el botón de abajo para descargar el archivo.</p>
+                    <b-button @click="descargarDocumento" variant="primary">Descargar Archivo</b-button>
+                </div>
+
+            </div>        
         </b-card>
+        <div class="row justify-content-center">
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" @click="verProyecto(proyecto.id)">Atrás</button>
+        </div>
+      </div>
     </div>
 </template>
 <script>
@@ -25,13 +37,13 @@ export default{
             usuario:null,
             entrega:{
                 id:null,
-          calificacion: null,
-          descripcion_entrega: null,
-          respuesta_instructor: null,
-          instructor: null,
-          proyecto: null,
-          tipo_revision: null,
-          autor: null
+                descripcion_entrega: null,
+                documento:null,
+                respuesta_instructor: null,
+                instructor: null,
+                proyecto: null,
+                tipo_revision: null,
+                autor: null
 
         },
         tipo_revision:null
@@ -49,6 +61,7 @@ export default{
             await axios.get('api/entrega/'+id+'/').then(response=>{
                 this.entrega.id = response.data.id,
                 this.entrega.calificacion= response.data.calificacion,
+                this.entrega.documento = response.data.documento,
                 this.entrega.descripcion_entrega= response.data.descripcion_entrega,
                 this.entrega.respuesta_instructor= response.data.respuesta_instructor,
                 this.entrega.instructor= response.data.instructor,
@@ -61,7 +74,23 @@ export default{
             await axios.get('api/tipo_revision/'+id+'/').then(response=>{
                 this.tipo_revision=response.data.nombre
             })
-        }
+        },
+        
+       descargarDocumento() {
+         // Crea un enlace temporal
+            const enlaceTemporal = document.createElement('a');
+            enlaceTemporal.href = this.entrega.documento; // Ruta del documento dentro de la carpeta "public"
+            enlaceTemporal.target = '_blank';
+            enlaceTemporal.download = 'nombre_documento.pdf'; // Nombre del archivo para la descarga
+            
+            // Simula un clic en el enlace temporal para iniciar la descarga
+            document.body.appendChild(enlaceTemporal);
+            enlaceTemporal.click();
+            document.body.removeChild(enlaceTemporal);
+       },
+       async verProyecto(id){
+        this.$router.push('/detalle-proyecto/'+id)
+      },
     },
     async mounted(){
         await this.getEntrega()
