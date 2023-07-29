@@ -4,8 +4,15 @@
       <b-col
         md="6"
         sm="12"
-      >
+        >
         <h2>Registrar Usuarios</h2>
+        <b-form-group
+        label="Formulario de registro"
+        >
+        <b-button @click="descargarDocumento()" variant="success">Download </b-button>
+    
+        
+      </b-form-group>
         <b-form class="">
           <b-form-group
             id="documento"
@@ -128,7 +135,23 @@ export default {
         .catch(error => {
           console.error(error);
         });
-    }
+    },
+    descargarDocumento() {
+  // Crea un enlace temporal
+  const enlaceTemporal = document.createElement('a');
+  
+  // Reemplaza la URL con la URL real para el archivo de Excel
+  enlaceTemporal.href = 'https://lexa2803.pythonanywhere.com/descargar-excel/';
+  
+  // Actualiza el nombre del archivo y la extensión para que coincida con el archivo de Excel
+  enlaceTemporal.download = 'nombre_documento.xlsx'; // Cambia a '.xlsx' para archivos de Excel
+
+  // Simula un clic en el enlace temporal para iniciar la descarga
+  document.body.appendChild(enlaceTemporal);
+  enlaceTemporal.click();
+  document.body.removeChild(enlaceTemporal);
+},
+
   },
   mounted() {
     this.getRol();
