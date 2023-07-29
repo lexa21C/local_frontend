@@ -72,7 +72,7 @@
               label="categorias:"
             >
             <b-dropdown text="Seleccionar categorria">
-              <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in categorias" :key="item.id" >
+              <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in categoria" :key="item.id" >
                 <b-form-checkbox  :value="item.id">
                   {{ item.nombre }}
                 </b-form-checkbox>
@@ -113,7 +113,7 @@
             categorias: null,
           },
 
-          categorias: [],
+          categoria: [],
           show: true,
   
         }
@@ -133,7 +133,7 @@
         } ,
         async getCategoria(){
               await this.axios('api/categoria/').then(response=>{
-                  this.categorias = response.data
+                  this.categoria = response.data
                   
               })
         },
@@ -144,13 +144,10 @@
           this.proyecto.autor=this.perfil
           this.proyecto.foto=this.foto
           this.proyecto.aprendiz=this.grupo[0].id
+          console.log(this.proyecto)
           try {
 
-            await this.axios.put('api/proyecto/'+id+'/', this.proyecto, {
-            headers: {
-              'Content-Type': 'multipart/form-data', // Aseguramos que el encabezado esté configurado correctamente
-            },
-          });
+            await this.axios.put('api/proyecto/'+id+'/', this.proyecto);
           await this.detalleProyecto(id)
   
 
@@ -170,8 +167,8 @@
             })
             console.log(this.grupo)
         },
-        async guardaFoto() {
-      let url = 'http://lexa2803.pythonanywhere.com/media/proyectos/foto/IMG-20230601-WA0037_PislcfP.jpg';
+        async guardaFoto(url) {
+   
       if (url) {
         try {
           console.log('Descargando imagen desde:', url);
@@ -191,7 +188,7 @@
           await this.getCategoria()
           await this.verProyecto()
           await this.getGrupo(this.perfil)
-          await this.guardaFoto();
+          await this.guardaFoto(this.proyecto.foto);
           
       }
     }
