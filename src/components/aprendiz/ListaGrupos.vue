@@ -6,17 +6,15 @@
         <thead>
           <tr>
             <th>Nombre Grupo</th>
-            <th>ID</th>
             <th>Accion</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="grupo in grupos" :key="grupo.id">
-            <td>{{ grupo.nombre_grupo }}</td>
-            <td>{{ grupo.id }}</td>
+            <td>{{ grupo.nombre_grupo.nombre_grupo }}</td>
             <td>
-              <button @click="actualizar(grupo.id)" class="btn btn-outline-success">Ir</button>
-              <button @click="confirmarEliminar(grupo.id)" class="btn btn-outline-danger">x</button>
+              <button @click="actualizar(grupo.nombre_grupo.id)" class="btn btn-outline-success">Ir</button>
+              <button @click="confirmarEliminar(grupo.id)" class="btn btn-outline-danger">Eliminar</button>
             </td>
           </tr>
           <b-alert v-if="showAlert" show variant="danger">{{ alertMessage }}</b-alert>
@@ -38,6 +36,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      id_perfil:this.$store.state.perfil.id,
       grupos: [],
       showAlert: false,
       alertMessage:"",
@@ -53,7 +52,7 @@ export default {
 
   methods: {
     getGrupos() {
-      axios.get('api/grupo/')
+      axios.get('api/usuario-grupos/'+this.id_perfil+'/')
         .then(response => {
           this.grupos = response.data;
           console.log("grupos:",this.grupos)
