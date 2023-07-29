@@ -30,7 +30,7 @@
                         </b-button>
                     </div>
                 </div>
-                {{ proyecto.foto }}
+                {{categoria }}
             </b-card>
       </div>
     </div>
@@ -80,6 +80,7 @@ export default{
     },
     async mounted(){
         await this.verProyecto()
+       
     }
 }
 </script>

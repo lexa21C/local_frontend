@@ -66,7 +66,7 @@ export default {
     },
 
     actualizar(id) {
-      this.$router.push('/grupo-agregar-integrantes/' + id);
+      this.$router.push('grupo-agregar-integrantes/' + id);
     },
 
     confirmarEliminar(id) {
