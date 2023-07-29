@@ -18,7 +18,7 @@
 
         <b-nav-item-dropdown text="Grupos" right>
           <b-dropdown-item to="/crear-grupo">Crear grupo</b-dropdown-item>
-          <b-dropdown-item to="/crear-proyecto">Ver Grupo</b-dropdown-item>
+          <b-dropdown-item to="/lista-grupos">Ver Grupo</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Mis Proyectos" right>
           <b-dropdown-item to="/crear-proyecto">Crear Proyecto</b-dropdown-item>

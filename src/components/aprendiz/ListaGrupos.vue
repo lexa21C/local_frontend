@@ -6,12 +6,14 @@
         <thead>
           <tr>
             <th>Nombre Grupo</th>
+            <th>ID</th>
             <th>Accion</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="grupo in grupos" :key="grupo.id">
             <td>{{ grupo.nombre_grupo }}</td>
+            <td>{{ grupo.id }}</td>
             <td>
               <button @click="actualizar(grupo.id)" class="btn btn-outline-success">Ir</button>
               <button @click="confirmarEliminar(grupo.id)" class="btn btn-outline-danger">x</button>
@@ -51,9 +53,10 @@ export default {
 
   methods: {
     getGrupos() {
-      axios.get('http://127.0.0.1:8000/api/grupo/')
+      axios.get('api/grupo/')
         .then(response => {
           this.grupos = response.data;
+          console.log("grupos:",this.grupos)
           // const idgrupo = response.data.
           // console.log("::::", idgrupo)
         })
@@ -73,7 +76,7 @@ export default {
     },
 
     eliminar(id) {
-      axios.delete("http://127.0.0.1:8000/api/grupo/" + id + "/")
+      axios.delete("api/grupo/" + id + "/")
         .then(() => {
           // Eliminar el grupo de la lista
           this.grupos = this.grupos.filter(grupo => grupo.id !== id);

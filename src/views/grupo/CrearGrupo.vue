@@ -17,54 +17,60 @@
   </div>
 </template>
   
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        grupo: {
-          nombre_grupo: '',
-        },
-        showAlert: false,
-        alertMessage: "",
-        showSpinner: false
-      };
-    },
-  
-    methods: {
-      crearGrupo() {
-        if (!this.grupo.nombre_grupo) {
-          this.showAlert = true;
-          this.alertMessage = "Ingrese un nombre válido";
-          return;
-        }
-
-        this.showSpinner = true;
-
-        axios.post('api/grupo/', this.grupo)
-          .then(response => {
-            console.log(response.data);
-            this.$router.push('/lista-grupos');
-          })
-          .catch(error => {
-            console.log(error.response.data);
-          })
-          .finally(() => {
-            this.showSpinner = false;
-          });
+<script>
+import axios from 'axios';
+import { mapState } from 'vuex';
+export default {
+  data() {
+    return {
+      grupo: {
+        nombre_grupo: '',
       },
-      verGrupos(){
-          this.$router.push('/lista-grupos')
-      },
-      cancelar(){
-          this.$router.push('/inicio')
+      showAlert: false,
+      alertMessage: "",
+      showSpinner: false
+    };
+  },
+  computed: {
+    ...mapState(['perfil']),
+    perfilLogueado() {
+      const idlogueado = this.perfil.id
+      return idlogueado
+    }
+  },
+  created(){
+    console.log(this.perfilLogueado)
+  },
+  methods: {
+    crearGrupo() {
+      if (!this.grupo.nombre_grupo) {
+        this.showAlert = true;
+        this.alertMessage = "Ingrese un nombre válido";
+        return;
       }
+
+      this.showSpinner = true;
+
+      axios.post('api/grupo/', this.grupo)
+        .then(response => {
+          console.log(response.data);
+          this.$router.push('/lista-grupos');
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        })
+        .finally(() => {
+          this.showSpinner = false;
+        });
     },
-  //   async verGrupos(){
-  //     this.$router.push('/ListaGrupos')
-  //   }
-  };
-  </script>
+    verGrupos(){
+        this.$router.push('/lista-grupos')
+    },
+    cancelar(){
+        this.$router.push('/inicio')
+    }
+  },
+};
+</script>
   
   

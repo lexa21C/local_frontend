@@ -31,7 +31,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Grupo',
+  name: 'GrupoAgregarIntegrantes',
   props: {
     integrantes: {
       type: Array,
@@ -57,7 +57,7 @@ export default {
       this.id = rutaActual.substring(rutaActual.lastIndexOf('/') + 1);
     },
     eliminarIntegrante(inscrito, index) {
-      axios.patch(`http://127.0.0.1:8000/api/inscrito/${inscrito.id}/`, { nombre_grupo: null })
+      axios.patch(`api/inscrito/${inscrito.id}/`, { nombre_grupo: null })
         .then(() => {
           this.remover(this.integrantes,  index, inscrito)
           this.$emit('integranteEliminado'); // Emitir el evento "integranteEliminado" al componente padre
@@ -67,15 +67,6 @@ export default {
         });
 
     },
-    agregarMiembro() {
-      this.$router.push('/agregar-integrante/' + this.id + "/");
-    },
-    cancelar() {
-      this.$router.push('/crear-grupo');
-    },
-    atras() {
-      this.$router.push('/lista-grupos');
-    }
   }
 };
 </script>
