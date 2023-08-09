@@ -124,24 +124,21 @@ export default {
       formData.append('file', this.documento);
       formData.append('ficha_id', this.ficha_id);
       formData.append('rol_id', this.rol_id); // Assuming the URL is the value you need
-
+        
       axios
         .post('api/upload/', formData)
         .then(response => {
-          this.items = response.data
+          this.items = response.data;
+          // Reset the form values after successful upload
+          this.documento = null;
+          this.ficha_id = null;
+          this.rol_id = null;
         })
-     
-        this.documento = null;
-        this.ficha_id = null;
-        this.rol_id = null;
-      
-        
-        // Crear una nueva instancia vacía de FormData para eliminar los datos anteriores
-        formData = new FormData()
         .catch(error => {
           console.error(error);
         });
     },
+    
     descargarDocumento() {
   // Crea un enlace temporal
   const enlaceTemporal = document.createElement('a');

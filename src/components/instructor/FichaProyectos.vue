@@ -52,6 +52,7 @@ import axios from 'axios'
         let id = this.$route.params.id
         axios.get('/api/proyectos-instructor/'+id+'/').then(response => {
           this.items = response.data
+          this.items.reverse();
         })
       },
       async getFicha(){

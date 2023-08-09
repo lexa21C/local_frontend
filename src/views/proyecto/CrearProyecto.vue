@@ -46,17 +46,17 @@
             </b-form-group>
             
             
-            <!-- <b-form-group
+            <b-form-group
               id="foto"
               label="Logo de la App:"
               label-for="foto"
             >
               <b-form-file
                 id="foto"
-                v-model="proyecto.foto"
+                v-model="foto"
                 accept="image/*"
               ></b-form-file>
-            </b-form-group>  -->
+            </b-form-group>  
            
             <b-form-group
               id="codigo_fuente"
@@ -91,10 +91,9 @@
             </div>
      
           </div>
-          <b-form-file v-model="proyecto.foto" class="mt-3" plain></b-form-file>
-          <div class="mt-3">Selected file: {{ selectedFile ? selectedFile.name : 'No file selected' }}</div>
+          
         </b-card>
-        {{ proyecto }}
+
       </div>
     </div>
   </div>
@@ -107,8 +106,8 @@
     data() {
       return {
         perfil: this.$store.state.perfil.id,
-        selectedFile: null, // Variable para guardar el objeto File seleccionado
-    
+        selectedFile: null, // Variable para guardar el objeto File seleccionad
+        foto:null,
         proyecto: { 
           nombre_proyecto:null,
           descripcion:null,
@@ -147,15 +146,25 @@
       const formData = new FormData();
       formData.append('nombre_proyecto', this.proyecto.nombre_proyecto);
       formData.append('descripcion', this.proyecto.descripcion);
-      formData.append('foto', this.proyecto.foto);
-      formData.append('aprendiz', this.grupo[0].id);
-      formData.append('codigo_fuente', this.proyecto.codigo_fuente);
-      formData.append('categorias', this.proyecto.categorias);
 
+      if (this.foto) {
+    formData.append('foto', this.foto);
+  }
+      formData.append('aprendiz', this.grupo[0].id);
+
+
+      // Agregar campo de código fuente, incluso si es null o undefined
+  formData.append('codigo_fuente', this.proyecto.codigo_fuente || '');
+      formData.append('aprendiz', this.grupo[0].id);
+      this.proyecto.categorias.forEach(categoriaId => {
+      formData.append('categorias', parseInt(categoriaId));
+      });
+  
+      
       try {
         // Send the project data to your API endpoint using Axios
         const archivo = { headers: { 'Content-Type': 'multipart/form-data'} } ;// Set the correct content type for file upload
-        const response = await this.axios.post('api/proyecto/', formData, archivo);
+        const response = await this.axios.post('api/proyecto/', formData,archivo);
 
         // Handle the response here (e.g., show success message or redirect to project details)
         let id_proyecto = response.data.id;

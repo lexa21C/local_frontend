@@ -30,7 +30,6 @@
                         </b-button>
                     </div>
                 </div>
-                {{categoria }}
             </b-card>
       </div>
     </div>

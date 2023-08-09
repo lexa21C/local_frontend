@@ -142,18 +142,35 @@
         },
         async editarProyecto(id){
           this.proyecto.autor=this.perfil
-          this.proyecto.foto=this.foto
+          
           this.proyecto.aprendiz=this.grupo[0].id
           console.log(this.proyecto.categorias)
+          const formData = new FormData();
+      formData.append('nombre_proyecto', this.proyecto.nombre_proyecto);
+      formData.append('descripcion', this.proyecto.descripcion);
+
+        
+      if (this.foto) {
+    formData.append('foto', this.foto);
+  }
+
+
+      // Agregar campo de código fuente, incluso si es null o undefined
+  formData.append('codigo_fuente', this.proyecto.codigo_fuente || '');
+      formData.append('aprendiz', this.grupo[0].id);
+
+      this.proyecto.categorias.forEach(categoriaId => {
+      formData.append('categorias', parseInt(categoriaId));
+      });
           try {
 
-            await this.axios.put('api/proyecto/'+id+'/', this.proyecto, {
+            await this.axios.put('api/proyecto/'+id+'/', formData, {
             headers: {
               'Content-Type': 'multipart/form-data', // Aseguramos que el encabezado esté configurado correctamente
             },
+            
           });
-          
-  
+          this.detalleProyecto(this.proyecto.id)
 
           } catch (error) {
        
@@ -171,27 +188,14 @@
             })
             console.log(this.grupo)
         },
-        async guardaFoto(url) {
-      if (url) {
-        try {
-          console.log('Descargando imagen desde:', url);
-          const response = await axios.get(url, {
-            responseType: 'blob',
-          });
-          this.foto = new File([response.data], 'foto.jpg', { type: 'image/jpeg' });
-          console.log('Imagen descargada exitosamente:', this.foto);
-        } catch (error) {
-          console.error('Error al descargar la imagen:', error);
-        }
-      }
-    },
+  
 
       },
       async mounted(){
           await this.getCategoria()
           await this.verProyecto()
           await this.getGrupo(this.perfil)
-          await this.guardaFoto();
+ 
           
       }
     }

@@ -13,7 +13,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 
-axios.defaults.baseURL = ' http://127.0.0.1:8000/'
+// axios.defaults.baseURL = 'http://127.0.0.1:8000/'
+axios.defaults.baseURL = 'http://lexa2803.pythonanywhere.com/'
 
 Vue.config.productionTip = false
 // Make BootstrapVue available throughout your project

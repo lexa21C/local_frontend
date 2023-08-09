@@ -8,8 +8,13 @@
           <b-icon icon="search" @click="search"></b-icon>
         </b-input-group-prepend>
       </b-input-group>
+      <div v-if="proyectos === null || proyectos.length === 0">
+          <b-alert show variant="info">No se encontraron resultados.</b-alert>
+        </div>
     </div>
-    <div class="row m-2"   v-for="proyecto in proyectos" :key="proyecto.id">
+    <div class="ro
+    w m-2"   v-for="proyecto in proyectos" :key="proyecto.id">
+
       <b-card class="m-1 p-1">
         <div class="row">
           <div class="col-lg-1 col-md-1">
@@ -17,7 +22,7 @@
           </div>
           <div class="col-lg-9">
             <h3>{{ proyecto.nombre_proyecto }}</h3>
-            <p><span class="fw-lighter">Estado: </span>{{ proyecto.estado }}</p>
+            <p><span class="fw-lighter">Esta39do: </span>{{ proyecto.estado }}</p>
           </div>
         </div>
         <div class="row">
@@ -50,18 +55,10 @@ export default{
     },
     methods:{
       getProyecto() {
-      axios.get("api/proyecto/", {
-        params: {
-          _sort: "id", // Ordenar por ID
-          _order: "desc", // De mayor a menor (los IDs más altos primero)
-        },
+      axios.get("api/proyecto/").then(response => {
+        this.proyectos = response.data
+        this.proyectos.reverse();
       })
-      .then(response => {
-        this.proyectos = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
     },
         descripcion(descripcion){
           // descripcion corta

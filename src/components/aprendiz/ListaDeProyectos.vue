@@ -62,6 +62,7 @@ export default{
           
           await this.axios.get("api/proyectos-aprendiz/"+id+'/').then(response=>{
             this.proyectos =response.data
+            this.proyectos.reverse(); 
           })
           console.log
         },
@@ -83,6 +84,7 @@ export default{
           },
         });
         this.proyecto = response.data;
+        
       } catch (error) {
         console.log(error);
       }
