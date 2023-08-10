@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
+import axios from 'axios'; // Asegúrate de importar axios aquí
 
 Vue.use(Vuex)
 
@@ -66,6 +67,16 @@ export default new Vuex.Store({
   },
   
   actions: {
+    async agregarUsuarioAGrupo(_, payload) {
+      try {
+        const response = await axios.post(`api/agregar_usuario_a_grupo/${payload.grupoId}/${payload.perfilId}`);
+        console.log(response.data);
+        // Puedes realizar alguna mutación si lo deseas
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    }
   },
   
   modules: {

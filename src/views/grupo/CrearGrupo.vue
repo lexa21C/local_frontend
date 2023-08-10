@@ -5,24 +5,26 @@
       <form @submit.prevent="crearGrupo">
         <div>
           <label for="nombre_grupo">Nombre:</label>
-          <input type="text" class="form-control" id="nombre_grupo" v-model="grupo.nombre_grupo">
+          <input type="text" class="form-control" id="nombre_grupo" v-model="grupo.nombre_grupo"><br>
           <b-alert v-if="showAlert" show variant="danger">{{ alertMessage }}</b-alert>
         </div>
-        <button type="submit" class="btn btn-outline-primary">Agregar Grupo</button>
-        <b-spinner v-if="showSpinner" variant="success" label="Creando Grupo"></b-spinner>
-        <button class="btn btn-outline-success" @click="verGrupos">Ver Grupos</button>
-        <button class="btn btn-outline-danger" @click="cancelar">Cancelar</button>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-outline-primary mx-2">Agregar Grupo</button>
+          <button class="btn btn-outline-success mx-2" @click="verGrupos">Ver Grupos</button>
+          <button class="btn btn-outline-danger mx-2" @click="cancelar">Cancelar</button>
+        </div>
       </form>
     </div>
   </div>
 </template>
-  
+
+
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
 export default {
   data() {
     return {
+      id_perfil: this.$store.state.perfil.id,
       grupo: {
         nombre_grupo: '',
       },
@@ -31,18 +33,11 @@ export default {
       showSpinner: false
     };
   },
-  computed: {
-    ...mapState(['perfil']),
-    perfilLogueado() {
-      const idlogueado = this.perfil.id
-      return idlogueado
-    }
-  },
   created(){
-    console.log(this.perfilLogueado)
+    //console.log("id_user:",this.perfilLogueado)
   },
   methods: {
-    crearGrupo() {
+    crearGrupo() {  
       if (!this.grupo.nombre_grupo) {
         this.showAlert = true;
         this.alertMessage = "Ingrese un nombre válido";
@@ -50,27 +45,40 @@ export default {
       }
 
       this.showSpinner = true;
-
+      
       axios.post('api/grupo/', this.grupo)
         .then(response => {
-          console.log(response.data);
-          this.$router.push('/lista-grupos');
+          let id_grupo = response.data.id;
+          console.log(id_grupo);
+          this.actualizarInscrito(id_grupo)
+            .then(() => {
+              console.log("Usuario agregado al grupo correctamente");
+              this.$router.push('/lista-grupos');
+            })
+            .catch(error => {
+              console.log("Error al agregar usuario al grupo:", error.response.data);
+              this.alertMessage = error.response.data.error || "Error al crear el grupo o agregar usuario al grupo.";
+              this.showAlert = true;
+            });
         })
         .catch(error => {
-          console.log(error.response.data);
+          console.log("Error al crear el grupo:", error.response.data);
+          this.alertMessage = error.response.data.error || "Error al crear el grupo.";
+          this.showAlert = true;
         })
         .finally(() => {
           this.showSpinner = false;
         });
     },
-    verGrupos(){
-        this.$router.push('/lista-grupos')
+    actualizarInscrito(id_grupo) {
+      return axios.put(`api/agregar-grupo/${this.id_perfil}/${id_grupo}/`);
     },
-    cancelar(){
-        this.$router.push('/inicio')
+    verGrupos() {
+      this.$router.push('/lista-grupos');
+    },
+    cancelar() {
+      this.$router.push('/inicio');
     }
   },
 };
 </script>
-  
-  

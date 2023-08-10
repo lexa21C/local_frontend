@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h2 class="p-3 text-center">Integrantes de tu grupo :) </h2>
+      <h2 class="p-3 text-center">Integrantes de tu grupo :).. </h2>
       <div class="row">
         <div class="col-12">
           <table class="table table-hover">
