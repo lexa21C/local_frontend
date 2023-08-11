@@ -12,7 +12,7 @@
                 <th scope="col">Programa de Formación</th>
                 <th scope="col">Proyecto</th>
                 <th scope="col">Integrantes</th>
-                <th scope="col">Ficha</th>
+                <!-- <th scope="col">Ficha</th> -->
               </tr>
             </thead>
             <tbody>
@@ -29,14 +29,14 @@
                     <b-icon icon="eye"></b-icon>
                   </b-button>
                 </td>
-                <td>
+                <!-- <td>
                   <b-button @click="editarEntrega(entrega)" variant="warning" class="mr-2">
                     <b-icon icon="pencil"></b-icon>
                   </b-button>
                   <b-button @click="eliminarEntrega(entrega.id)" variant="danger">
                     <b-icon icon="trash"></b-icon>
                   </b-button>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

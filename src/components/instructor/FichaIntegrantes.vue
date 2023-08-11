@@ -12,6 +12,7 @@
                 <th scope="col">nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Rol</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
 
               </tr>
@@ -20,48 +21,28 @@
               <tr>
                 <td>{{ item.perfil.usuario.first_name }}</td>
                 <td>{{ item.perfil.usuario.last_name }}</td>
+                <td>{{ item.estado}} </td>
                 <td>{{ item.perfil.rol.nombre}} </td>
                 <td>
-                  <div>
-  <b-button v-b-modal.modal-prevent-closing>Cambiar de ficha</b-button>
-  <b-modal
-    id="modal-prevent-closing"
-    ref="modal"
-    title="Cambiar aprendiz de ficha"
-    ok-title="cambiar"
-    @show="resetModal"
-    @hidden="resetModal"
-    @ok="handleOk"
-  >
-    <form ref="form" @submit.stop.prevent="handleSubmit">
-      <b-form-group
-        label="Name"
-        label-for="name-input"
-        invalid-feedback="Name is required"
-        :state="nameState"
-      >
-        <b-form-select
-          id="name-input"
-          v-model="name"
-          :options="ficha"
-          value-field="codigo"
-          text-field="codigo" 
-          required
-        >
-          <template #first>
-            <b-form-select-option :value="null" disabled>-- Por favor seleccione una opción --</b-form-select-option>
-          </template>
-        </b-form-select>
-      </b-form-group>
-    </form>
-  </b-modal>
-</div>
+                  <div v-if="item.estado == 'activo'" >
 
+                    <b-button @click="editarInscrito(item.perfil.usuario.id)" variant="warning" class="mr-2">
+                      Cambiar de ficha
+                    </b-button>
+                  </div>
+                  <div v-else>
+                    {{ item.estado}}
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+        <div class="row justify-content-center">
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" @click="verProyecto(proyecto.id)">Atrás</button>
+        </div>
+      </div>
     </div>
     </div>
   </template>
@@ -107,7 +88,9 @@ import axios from 'axios'
       this.modalShow = true;
       this.$emit('modalUpdated', true);
     },
-      
+    async editarInscrito(id){
+      this.$router.push('/agregar-integrantes/'+id)
+    },
     },
     async mounted(){
       await this.getFichaIntegrantes()

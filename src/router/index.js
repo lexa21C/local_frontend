@@ -28,6 +28,7 @@ import GrupoAgregarIntegrantes from '@/views/grupo/AgregarIntegrantes.vue'
 import CrearFicha from '@/components/instructor/CrearFicha.vue'
 import ListaFicha  from '@/views/ficha/FichaLista.vue'
 import FichaIntegrantes from '@/components/instructor/FichaIntegrantes'
+import CambiarFicha from '@/views/ficha/CambiarFicha.vue'
 
 
 
@@ -155,6 +156,11 @@ const routes = [
     path:'/ficha-integrantes/:id',
     name: 'ficha-integrantes',
     component: FichaIntegrantes
+  },
+  {
+    path:'/agregar-integrantes/:id',
+    name: 'agregar-integrantes',
+    component: CambiarFicha
   },
   {
     path:'/lista-ficha',
