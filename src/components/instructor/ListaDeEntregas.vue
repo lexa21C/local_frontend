@@ -8,7 +8,7 @@
                   {{ entrega.tipo_revision.nombre }}                    
                   </div>
                   <div class="text-end ">
-                        <span class="link-text" @click="detalleEntrega(entrega.id)"  disabled>ver mas</span>
+                        <span class="link-text" @click="detalleEntrega(entrega.id)"  disabled>Ver mas...</span>
                       </div>                 
               </b-list-group-item>
           </b-list-group>

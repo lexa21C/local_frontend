@@ -9,7 +9,7 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th scope="col">nombre</th>
+                <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Acciones</th>

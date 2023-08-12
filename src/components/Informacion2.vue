@@ -5,7 +5,7 @@
   
     <b-row>
       <b-col class="info2" >
-        <h2> Nuestro Proposito </h2>
+        <h2> Nuestro Propósito </h2>
   
           <p>Ayudar a los aprendices SENA en la identificación, formulación y gestión de proyectos de desarrollo institucional.
   </p>

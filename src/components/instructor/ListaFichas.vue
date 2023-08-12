@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Listado de Fichas</h1>
+    <h1>Listado de fichas</h1>
     <h2>Centro Teleinformática y Producción Industrial</h2>
     <b-row>
       <b-col>

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <b-card class="m-1">
-            <h2>Entregas del proyecto {{ proyecto.nombre_proyecto }} </h2>
+            <h2>Entregas de{{ proyecto.nombre_proyecto }} </h2>
             <div class="row">
                 <p class="fw-lighter">Descripcion:</p>
                 <p>{{ entrega.descripcion_entrega }}</p>

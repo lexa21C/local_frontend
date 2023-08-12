@@ -3,7 +3,7 @@
     <b-container class="informaciona">
   <b-row>
     <b-col class="info1">
-<h2>Nuestra Funcion  </h2>
+<h2>Nuestra Función  </h2>
 <P>El Banco de Proyectos del SENA regional Cauca estará a cargo de las labores relacionadas con la formulación, el seguimiento, la actualización y el acompañamiento (orientar y apoyar) de los proyectos realizados y desarrollados por los aprendices SENA.
 <p>
   Estableciendo las normas comunes, que permitan fijar los estudios de viabilidad de cada proyecto.

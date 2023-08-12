@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row ">
-      <h4>Realizado por el grupo :{{ integrantes[0].nombre_grupo.nombre_grupo }}</h4>
+      <h4>Realizado por el grupo: {{ integrantes[0].nombre_grupo.nombre_grupo }}</h4>
       <p>
         <strong>Integrantes:</strong>
       </p>
@@ -16,7 +16,7 @@
         </b-list-group>
       </div>
     </div>
-  </div>
+    
 </template>
 
 <script>

@@ -16,15 +16,15 @@
       <b-navbar-nav class="ml-auto">
         
         <b-nav-item to="/lista-proyecto">Proyectos</b-nav-item>
-        <b-nav-item to="/registrar">Registrar Usarios</b-nav-item>
+        <b-nav-item to="/registrar">Registrar Usuarios</b-nav-item>
         <b-nav-item-dropdown text="Fichas" right>
           <b-dropdown-item to="/crear-ficha">Agregar Fichas</b-dropdown-item>
-          <b-dropdown-item to="/lista-ficha">Ver fichas</b-dropdown-item>
+          <b-dropdown-item to="/lista-ficha">Ver Fichas</b-dropdown-item>
         </b-nav-item-dropdown>
         
         <b-nav-item to="/mis-proyectos">{{ nombre }}<span>({{ rol }})</span></b-nav-item>
         
-        <b-nav-item  @click="logout()">cerrar sesion</b-nav-item>
+        <b-nav-item  @click="logout()">Cerrar Sesión</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

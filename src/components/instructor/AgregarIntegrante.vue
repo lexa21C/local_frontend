@@ -3,7 +3,7 @@
       <b-button v-b-modal.modal-prevent-closing>Agregar</b-button>
   
       <div class="mt-3">
-        Agregar un Inscrito a la Ficha
+        Agregar un inscrito a la ficha
         <div v-if="submittedNames.length === 0">--</div>
         <ul v-else class="mb-0 pl-3">
           <li v-for="(name, index) in submittedNames" :key="index">{{ name }}</li>

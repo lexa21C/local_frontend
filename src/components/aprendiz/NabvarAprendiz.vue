@@ -25,7 +25,7 @@
           <b-dropdown-item to="/mis-proyectos">Ver Proyecto</b-dropdown-item>
         </b-nav-item-dropdown>
         <!-- <b-nav-item to="/mis-proyectos">{{ rol }}</b-nav-item> -->
-        <b-nav-item to="/mis-proyectos">{{ nombre }} | id:{{ id }}<span> | {{ rol }}</span></b-nav-item>
+        <b-nav-item to="/mis-proyectos">{{ nombre }} |<span> | {{ rol }}</span></b-nav-item>
 
         <b-nav-item @click="logout()">Cerrar sesión</b-nav-item>
       </b-navbar-nav>
