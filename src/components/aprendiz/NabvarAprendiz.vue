@@ -1,7 +1,8 @@
 <template>
   <b-navbar class="navbar" toggleable="lg">
     <b-navbar-brand href="#">
-      <img src="../../assets/logo1.png" alt="Logo" class="m-2" style="width: 50px; height: 50px;">
+      <img src="../../assets/logo1.png" alt="Logo" class="m-2" style="max-width: 100px; min-width: 50px; width: auto; height: auto;">
+
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -10,7 +11,7 @@
       <b-navbar-nav>
         <!-- Enlaces de router a la izquierda -->
         <b-nav-item to="/">Inicio</b-nav-item>
-        <b-nav-item to="/acerca">Acerca</b-nav-item>
+       
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <!-- Enlaces de router a la derecha -->
@@ -26,7 +27,6 @@
         </b-nav-item-dropdown>
         <!-- <b-nav-item to="/mis-proyectos">{{ rol }}</b-nav-item> -->
         <b-nav-item to="/mis-proyectos">{{ nombre }} |<span> | {{ rol }}</span></b-nav-item>
-
         <b-nav-item @click="logout()">Cerrar sesión</b-nav-item>
       </b-navbar-nav>
     </b-collapse>

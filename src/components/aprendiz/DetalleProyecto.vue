@@ -65,7 +65,7 @@ export default{
         if (confirmed) {
           // Proceed with deletion
           await axios.delete('api/proyecto/' + id + '/');
-          await this.getEntregas();
+          await this.misProyectos();
         }
       } else {
         // Show an alert indicating that the project cannot be deleted
@@ -97,9 +97,9 @@ export default{
             console.log(id)
             this.$router.push('/editar-proyecto/'+id)
         },
-        misProyectos(id){
-            console.log(id)
-            this.$router.push('/mis-proyecto/'+id)
+        misProyectos(){
+            
+            this.$router.push('/mis-proyectos')
         },
            
     },

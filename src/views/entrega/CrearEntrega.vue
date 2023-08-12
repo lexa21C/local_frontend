@@ -42,7 +42,7 @@
           <b-button class="m-1" type="reset" variant="danger">Cancelar</b-button>
           <b-button  @click="crearEntrega()" class="m-1">Enviar</b-button>
         </div>
-        {{ er }}
+        
       </b-card>
     </div>
   </div>

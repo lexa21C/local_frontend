@@ -12,16 +12,16 @@
     img-height="300"
   >
     <b-carousel-slide
-      caption="First Slide"
-      img-src="https://res.cloudinary.com/dt5mbmxva/image/upload/v1680051327/BANK_PROYECT_sskoe6.jpg"
+     
+      img-src="https://res.cloudinary.com/dvcq7qkp7/image/upload/v1691443095/derlynpaz4_ghnhti.png"
     ></b-carousel-slide>
     <b-carousel-slide
-      caption="Second Slide"
-      img-src="https://res.cloudinary.com/dt5mbmxva/image/upload/v1680051872/unnamed_gjxt1l.png"
+      
+      img-src="https://res.cloudinary.com/dvcq7qkp7/image/upload/v1691443095/derlynpaz3_x4ygtg.png"
     ></b-carousel-slide>
     <b-carousel-slide
-      caption="Third Slide"
-      img-src="https://res.cloudinary.com/dt5mbmxva/image/upload/v1680052219/Sin_t%C3%ADtulo-2_s8nlyz.png"
+      
+      img-src="https://res.cloudinary.com/dvcq7qkp7/image/upload/v1691443097/derlynpaz2_gcq6lc.png"
     ></b-carousel-slide>
   </b-carousel>
 </div>
