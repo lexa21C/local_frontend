@@ -18,7 +18,7 @@
       <b-navbar-nav class="ml-auto">
         
         <b-nav-item to="/lista-proyecto">Proyectos</b-nav-item>
-        <b-nav-item to="/login">Iniciar sesión </b-nav-item>
+        <b-nav-item to="/login">Iniciar Sesión </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

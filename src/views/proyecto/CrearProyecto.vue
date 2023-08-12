@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="row justify-content-center">
-        <h1 class="text-center">Crear un proyecto del grupo {{ grupo[0].nombre_grupo.nombre_grupo }}  </h1>
+        <h1 class="text-center">Crear un proyecto del grupo: {{ grupo[0].nombre_grupo.nombre_grupo }}  </h1>
       </div>
 
     </div>

@@ -1,17 +1,17 @@
 <template>
     <div class="container">
         <b-card class="m-1">
-            <h2>Entregas de{{ proyecto.nombre_proyecto }} </h2>
+            <h2>Entregas de {{ proyecto.nombre_proyecto }} </h2>
             <div class="row">
                 <p class="fw-lighter">Descripcion:</p>
                 <p>{{ entrega.descripcion_entrega }}</p>
                 <p><span class="fw-lighter">Estado de la entrega: </span>{{ entrega.calificacion }}</p>
             </div>
             <div class="row">
-                <p><span class="fw-lighter">Tipo De Revision: </span>{{ tipo_revision }}</p>
+                <p><span class="fw-lighter">Tipo de revision: </span>{{ tipo_revision }}</p>
             </div>
             <div class="row">
-                <p><span class="fw-lighter">Nota del Instructor: </span>{{ entrega.respuesta_instructor }}</p>
+                <p><span class="fw-lighter">Nota del instructor: </span>{{ entrega.respuesta_instructor }}</p>
             </div>
             <div class="row">
                 <div>

@@ -5,7 +5,7 @@
       <b-form>
         <b-form-group
           id="descripcion_entrega"
-          label="Descripción de la Entrega:"
+          label="Descripción de la entrega:"
           label-for="descripcion_entrega"
         >
           <b-form-textarea
@@ -17,7 +17,7 @@
         </b-form-group>
         <b-form-group
           id="documento"
-          label="Documento :"
+          label="Documento:"
           label-for="documento"
         >
           <b-form-file
