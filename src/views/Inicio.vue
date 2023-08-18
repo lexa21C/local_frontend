@@ -16,13 +16,13 @@
       <imginicio></imginicio>
 
      </body>
-    <Footer>
-    </Footer>
+ 
+     
   </div>
 </template>
 <script>
   
-  import Footer from '../components/Footer.vue'
+
   import Carrusel from '../components/Carrusel.vue'
   import Informacion from '../components/Informacion.vue'
   import Ideas from '../components/Ideas.vue'
@@ -34,7 +34,7 @@
   export default {
 
     components: {
-       Footer, Carrusel, Informacion, Ideas,Informaciondos,imginicio
+        Carrusel, Informacion, Ideas,Informaciondos,imginicio
     }
 
   }

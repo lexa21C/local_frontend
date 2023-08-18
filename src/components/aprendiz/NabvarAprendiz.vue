@@ -25,8 +25,8 @@
           <b-dropdown-item to="/crear-proyecto">Crear Proyecto</b-dropdown-item>
           <b-dropdown-item to="/mis-proyectos">Ver Proyecto</b-dropdown-item>
         </b-nav-item-dropdown>
-        <!-- <b-nav-item to="/mis-proyectos">{{ rol }}</b-nav-item> -->
-        <b-nav-item to="/mis-proyectos">{{ nombre }} |<span> | {{ rol }}</span></b-nav-item>
+        <b-nav-item to="/lista-proyectos">{{ rol }}</b-nav-item> 
+       
         <b-nav-item @click="logout()">Cerrar sesión</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -79,7 +79,7 @@
               this.$store.commit('clearState')
   
   
-              this.$router.push('/inicio')
+              this.$router.push('/')
           }
       }
   }

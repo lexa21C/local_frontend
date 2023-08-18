@@ -16,12 +16,21 @@
                       <div class="col-lg-1 col-md-1">
                         <b-img class="imagen" :src="proyecto.foto" :alt="proyecto.nombre_proyecto"></b-img>
                         </div>
+                
                         <div class="col-lg-9">
                             <h3>{{ proyecto.nombre_proyecto }}</h3>
+                            
+                         
+                        </div>
+                        <div>
                           <p ><span class="fw-lighter" >Estado: </span>{{ proyecto.estado }}</p>
+
                         </div>
                       </div>
                       <div class="row">
+                       
+
+
                         <p class="fw-lighter">Descripcion:</p>
                         <p>{{ descripcion(proyecto.descripcion) }}</p>
                       </div>

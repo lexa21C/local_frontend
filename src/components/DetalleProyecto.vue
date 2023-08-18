@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1>{{ proyecto.nombre }}</h1>
+                    <h1>{{ proyecto.nombre_proyecto }}</h1>
                     <p><span class="fw-lighter">Estado: </span>{{ proyecto.estado }}</p>
                     <p class="fw-lighter">Descripcion:</p>
                     <p>{{ proyecto.descripcion }}</p>

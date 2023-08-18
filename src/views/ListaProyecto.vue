@@ -22,8 +22,9 @@
           </div>
           <div class="col-lg-9">
             <h3>{{ proyecto.nombre_proyecto }}</h3>
-            <p><span class="fw-lighter">Esta39do: </span>{{ proyecto.estado }}</p>
+            
           </div>
+          <div><p><span class="fw-lighter">Estado: </span>{{ proyecto.estado }}</p> </div>
         </div>
         <div class="row">
           <p class="fw-lighter">Descripcion:</p>

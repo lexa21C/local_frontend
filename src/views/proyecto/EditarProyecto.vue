@@ -68,8 +68,8 @@
                 type="url"
               ></b-form-input>
             </b-form-group>
-            <b-form-group label="categorias:">
-            <b-dropdown text="Seleccionar categoría">
+            <b-form-group label="Categorias:">
+            <b-dropdown text="Seleccionar categorías">
               <b-form-checkbox-group
                 v-model="proyecto.categorias"
                 v-for="item in categorias"
@@ -85,10 +85,17 @@
             <b-button class="m-1" type="reset" variant="danger" @click="detalleProyecto(proyecto.id)">Cancelar</b-button>
             <b-button class="m-1 enviar" @click="editarProyecto(proyecto.id)" >Enviar</b-button>
           </b-form>
-          <div class="mt-3">Selected: <strong>{{this.proyecto}}</strong></div>
         </b-card>
       </div>
     </div>
+    <div class="row m-1">
+            <div >
+              
+              <b-alert v-if="showAlert" show variant="danger">{{ alertMessage }}</b-alert>
+          </b-alert>
+            </div>
+     
+          </div>
   </div>
   </template>
   
@@ -115,6 +122,8 @@
 
           categorias: [],
           show: true,
+          showAlert: false,
+      alertMessage: "",
   
         }
       },
@@ -141,6 +150,11 @@
           this.$router.push('/detalle-proyecto/'+id)
         },
         async editarProyecto(id){
+          if (!this.proyecto.nombre_proyecto || !this.proyecto.descripcion) {
+            this.showAlert = true; // Mostrar la alerta de error
+            this.alertMessage = 'El campo Nombre del Proyecto y/o Descripción no pueden estar en blanco.';
+            return; // Detener el proceso si hay campos vacíos
+      }
           this.proyecto.autor=this.perfil
           
           this.proyecto.aprendiz=this.grupo[0].id
@@ -175,6 +189,8 @@
           } catch (error) {
        
             console.error('Error:', error.response.data);
+            this.alertMessage = 'Error al crear el proyecto. Por favor, inténtalo nuevamente.';
+        this.showAlert = true;
           }
        
         

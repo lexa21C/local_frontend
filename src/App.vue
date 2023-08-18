@@ -2,7 +2,7 @@
   <div>
     <nav>
       <template v-if="$store.state.user.isAuthenticated">
-        <template v-if="rol == 'aprendiz'">
+        <template v-if="rol =='aprendiz'">
           <NabvarAprendiz></NabvarAprendiz>
         </template>
         <template v-else>
@@ -13,6 +13,7 @@
         <Nabvar></Nabvar>
       </template>
     </nav>
+  
     <router-view />
   </div>
 </template>
@@ -33,6 +34,7 @@ export default {
     Nabvar,
     NabvarAprendiz,
     NabvarInstructor,
+   
   },
   beforeCreate() {
     this.$store.commit('initializeStore');

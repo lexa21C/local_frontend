@@ -1,12 +1,12 @@
 <template>
     <div>
-      
+        
 <b-container class="politicas">
   <b-row>
     <b-col>
-        <h1>POLÍTICA DE PRIVACIDAD </h1> 
-       <h2>El SENA asume el compromiso de proteger los activos de información de los procesos de la entidad y se compromete con:
-</h2>
+        <h3>POLÍTICA DE PRIVACIDAD </h3> 
+       <p>El SENA asume el compromiso de proteger los activos de información de los procesos de la entidad y se compromete con:
+       </p>
 <p> La gestión de los riesgos de los activos de la información, teniendo en cuenta el nivel de tolerancia al riesgo de la entidad.
 </p>
 <p>
@@ -23,19 +23,21 @@
     Salvaguardar la tecnología utilizada para el procesamiento de la información frente a amenazas internas o externas, deliberadas o accidentales.  
 </P>
 
-<h2>POLITICA DE TRATAMIENTO DE DATOS</h2>
-<h2>EL SENA CENTRO DE TELEINFORMATICA Y PRODUCCION INDUSTRIAL</h2>
+<h4>POLÍTICA DE TRATAMIENTO DE DATOS</h4>
+
 <P>
-    En uso de sus facultades legales y en especial de las que le confiere la Resolución N°000005 de agosto 14 de 2015, el artículo 13 del Acuerdo Superior No° 08 de octubre 04 de 2012, la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de 2013.  
+
+
+   EL SENA (CENTRO DE TELEINFORMATICA Y PRODUCCION INDUSTRIAL) En uso de sus facultades legales y en especial de las que le confiere la Resolución N°000005 de agosto 14 de 2015, el artículo 13 del Acuerdo Superior No° 08 de octubre 04 de 2012, la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de 2013.  
 </P>
-<h2> CONSIDERANDO</h2>
-<p>Que la Constitución política Nacional de Colombia de 1991 establece en su artículo 15. "Todas las personas tienen derecho a su intimidad personal y familiar y a su buen nombre, y el Estado debe respetarlos y hacerlos respetar. De igual modo, tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos y en archivos de entidades públicas y privadas. En la recolección, tratamiento y circulación de datos se respetarán la libertad y demás garantías consagradas en la Constitución. (...)"
+<h4> CONSIDERANDO</h4>
+<p>Que la Constitución política Nacional de Colombia de 1991 establece en su artículo 15. "Todas las personas tienen derecho a su intimidad personal y familiar y a su buen nombre, y el Estado debe respetarlos y hacerlos respetar. De igual modo, tienen derecho a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos y en archivos de entidades públicas y privadas. En la recolección, tratamiento y circulación de datos se respetarán la libertad y demás garantías consagradas en la Constitución."
 Que la Ley Estatutaria 1581 de 2012, por la cual se dictan disposiciones generales para la protección de datos personales, en el artículo 18 literal “f) adoptar un manual interno de políticas y procedimientos para garantizar el adecuado cumplimiento de la presente ley y, en especial, para la atención de consultas y reclamos por parte de los titulares;".
 Que según lo estipulado en el Decreto 1377 de 2013 por el cual se reglamenta parcialmente la Ley 1581 de 2012, en su artículo 13; establece la información mínima requerida para el desarrollo de la política y procedimiento de tratamiento de datos.
 </p>
-<h2>   
+<h4>   
     RESUELVE
-</h2>
+</h4>
 <p>
     Artículo 1. Adoptar la política y procedimiento para el tratamiento y protección de datos personales de los miembros de la comunidad del SENA, entendiendo por estos a los estudiantes, docentes, egresados, empleados, y contratistas de la institución; de igual forma se asimilarán como usuarios de la presente política a, los visitantes, conferencistas, proveedores y ex empleados que registren su información personal en las bases de datos de la institución, de conformidad con lo estipulado en la Ley 1581 de 2012 y sus decretos reglamentarios.
 
@@ -73,7 +75,7 @@ Principio de confidencialidad: El Sena tiene el compromiso de garantizar la rese
     
   </b-row>
 </b-container>
-
+<FooterVue></FooterVue>
 
     </div>
 </template>
@@ -84,16 +86,40 @@ Principio de confidencialidad: El Sena tiene el compromiso de garantizar la rese
   border-width: thin;
   border-style: solid;
   border-color:#B5B2B2;
-  margin: 2px 2px 2px 2px;
+  margin: 5px 5px 5px 5px;
  
 }
-
-h1{
+h1 {
     text-align: center;
 }
-h2 {
+h3{
     text-align: center;
 }
 
+h2{
+    text-align: center;
+}
+h4 {
+    text-align: center;
+}
+h5 {
+    text-align: center;
+}
 
 </style>
+
+<script>
+
+import FooterVue from '@/components/Footer.vue'
+
+
+export default {
+
+  components: {
+    FooterVue
+  }
+
+}
+
+
+</script>

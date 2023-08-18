@@ -54,7 +54,7 @@ export default {
 
             this.$store.commit('removeToken')
 
-            this.$router.push('/inicio')
+            this.$router.push('/')
         }
     }
 }
