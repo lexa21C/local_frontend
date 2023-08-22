@@ -39,7 +39,7 @@
           </b-form-group>
         </b-form>
         <div class=" position-absolute bottom-0 end-0">
-          <b-button class="m-1" type="reset" variant="danger">Cancelar</b-button>
+          <b-button  @click="verProyecto(proyecto.id)" class="m-1" type="reset" variant="danger">Cancelar</b-button>
           <b-button  @click="crearEntrega()" class="m-1">Enviar</b-button>
         </div>
         
