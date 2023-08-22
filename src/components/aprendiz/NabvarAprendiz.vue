@@ -74,8 +74,9 @@
               axios.defaults.headers.common['Authorization'] = ""
   
               localStorage.removeItem('token')
-  
-              this.$store.commit('removeToken')
+            localStorage.removeItem('rol');
+            this.$store.commit('removeToken')
+            this.$store.commit('setRol', ''); 
               this.$store.commit('clearState')
   
   
